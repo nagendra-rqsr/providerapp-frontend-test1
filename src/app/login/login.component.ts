@@ -8,7 +8,7 @@ import { AppService } from '../app.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user = { username: '', password: '' };
+  user = { username: '', password: '', site_id: '' };
   sites: any[] = [];
 
   constructor(
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.appService.getSites().subscribe(data => {
       this.sites = data;
     }, (err) => {
-      this.sites = [{ "id": "2", "name": "BP2" }, { "id": "1", "name": "BP1" }];
+      // this.sites = [{ "id": "2", "name": "BP2" }, { "id": "1", "name": "BP1" }];
     });
   }
 

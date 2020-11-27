@@ -4,12 +4,19 @@
             <div class="ml-3 mt-5 bg-light card card-body">
                 <h5 class="mb-3 text-center text-secondary">Manager Login</h5>
                 <div class="form-group">
+                    <label>Site ID</label>
+                    <select class="form-control" [(ngModel)]="user.site_id">
+                        <option value="">Select Site</option>
+                        <option [value]="site.id" *ngFor="let site of sites">{{site.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Username</label>
                     <input type="text" class="form-control" [(ngModel)]="user.username">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.password">
+                    <input type="password" class="form-control" [(ngModel)]="user.password">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" (click)="onLogin()">Login</button>
