@@ -1,12 +1,17 @@
 <div class="container-fluid mt-3">
-    <div class="text-center">
-        <button type="button" class="btn btn-primary" (click)="onRegisterDoctor()">
-            <span class="fa fa-plus"></span>
-            Register Doctor
-        </button>
-    </div>
     <div class="row mt-3">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-3">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="onRegisterDoctor()">
+                    Register New Doctor
+                </button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="signOut()">SingOut</button>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4 class="mb-3 text-secondary">List of Registered Doctors</h4>
             <table class="table table-bordered">
                 <thead class="bg-light">
                     <tr>
@@ -15,6 +20,7 @@
                         <th>Doctor Name</th>
                         <th>Email</th>
                         <th>RegisteredOn</th>
+                        <th>IsActive</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,9 +30,16 @@
                         <td>{{doc.doctor_name}}</td>
                         <td>{{doc.email}}</td>
                         <td>{{doc.created_on | date}}</td>
+                        <th (click)="onIsActiveToggle(doc)" class="text-center">
+                            <span *ngIf="doc.isActive" class="fa fa-toggle-on fa-lg text-primary"></span>
+                            <span *ngIf="!doc.isActive" class="fa fa-toggle-off fa-lg text-secondary"></span>
+                        </th>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="form-group float-right">
+        <button class="btn btn-primary" (click)="submit()" [disabled]="!isActiveDirty">Submit</button>
     </div>
 </div>

@@ -9,6 +9,7 @@ import { AppService } from 'src/app/app.service';
 })
 export class RegisteredDoctorsComponent implements OnInit {
   registered_doctors: any[] = [];
+  isActiveDirty = false;
 
   constructor(
     private appService: AppService,
@@ -16,6 +17,10 @@ export class RegisteredDoctorsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    let _mgr = sessionStorage.getItem('MGR_USR');
+    if(!_mgr) {
+      this.router.navigate(['/']);
+    }
     this.getResiteredDoctors();
   }
 
@@ -27,6 +32,23 @@ export class RegisteredDoctorsComponent implements OnInit {
 
   onRegisterDoctor() {
     this.router.navigate(['/manager/register-doctor'])
+  }
+
+  signOut() {
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
+
+  onIsActiveToggle(doc: any) {
+    doc.isActive = !doc.isActive;
+    this.isActiveDirty = true;
+  }
+
+  submit() {
+    this.appService.updateRegisteredDoctors(this.registered_doctors).subscribe((resp) => {
+      alert('updated');
+      this.getResiteredDoctors();
+    });
   }
 
 }

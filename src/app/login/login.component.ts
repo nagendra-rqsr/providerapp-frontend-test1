@@ -10,6 +10,7 @@ import { AppService } from '../app.service';
 export class LoginComponent implements OnInit {
   user = { username: '', password: '', site_id: '' };
   sites: any[] = [];
+  error = '';
 
   constructor(
     private router: Router,
@@ -29,10 +30,13 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    this.error = '';
     this.appService.login(this.user).subscribe((resp) => {
       sessionStorage.setItem('MGR_USR', JSON.stringify(resp));
       this.router.navigate(['/manager']);
-    }, (err) => alert('error occured'));
+    }, (err) => {
+      this.error = err.error;
+    });
   }
 
 }

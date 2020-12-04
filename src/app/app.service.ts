@@ -53,4 +53,9 @@ export class AppService {
         const url = this.baseUrl + 'accounts/register-doctor/'
         return this.http.post(url, doctor);
     }
+
+    updateRegisteredDoctors(doctors: any): Observable<any> {
+        const url = this.baseUrl + 'accounts/register-doctor/'
+        return this.http.put(url, doctors);
+    }
 }
