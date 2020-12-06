@@ -1,2 +1,9 @@
-
+<div class="top-bar">
+    <div class="brand-name" routerLink="/manager/registered-doctors">ProviderApp</div>
+    <div class="d-inline-block">
+        <div *ngIf="manager" class="d-inline-block text-secondary" routerLink="/manager/registered-doctors">
+        <h3>Welcome to BP{{manager.site_id}}</h3>
+        </div>
+    </div>
+</div>
 <router-outlet></router-outlet>

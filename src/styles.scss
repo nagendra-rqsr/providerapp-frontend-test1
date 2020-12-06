@@ -3,3 +3,17 @@
 label {
     margin-bottom: 0px;
 }
+
+.top-bar {
+    // border-bottom: 1px solid lightgray;
+    background-color: #f9f9f9;
+}
+.brand-name {
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    padding: 25px;
+    font-size: 1.5rem;
+    color: gray;
+    margin-right: 10%;
+}
