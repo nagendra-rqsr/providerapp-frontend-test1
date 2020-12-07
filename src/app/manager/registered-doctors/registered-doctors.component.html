@@ -1,13 +1,13 @@
 <div class="container-fluid mt-3">
     <div class="row mt-3">
         <div class="col-md-3">
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" (click)="onRegisterDoctor()">
+            <div class="form-group mt-5">
+                <button type="button" class="btn btn-primary w-170" (click)="onRegisterDoctor()">
                     Register New Doctor
                 </button>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" (click)="signOut()">SingOut</button>
+                <button class="btn btn-primary w-170" (click)="signOut()">Sign Out</button>
             </div>
         </div>
         <div class="col-md-8">
@@ -19,8 +19,8 @@
                         <th>Doctor ID</th>
                         <th>Doctor Name</th>
                         <th>Email</th>
-                        <th>RegisteredOn</th>
-                        <th>IsActive</th>
+                        <th>Registered On</th>
+                        <th>Is Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +39,7 @@
             </table>
         </div>
     </div>
-    <div class="form-group float-right">
-        <button class="btn btn-primary" (click)="submit()" [disabled]="!isActiveDirty">Submit</button>
+    <div class="form-group text-center">
+        <button class="btn btn-primary w-170" (click)="submit()" [disabled]="!isActiveDirty">Submit</button>
     </div>
 </div>
