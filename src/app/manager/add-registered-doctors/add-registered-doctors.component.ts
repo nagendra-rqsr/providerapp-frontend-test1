@@ -33,10 +33,10 @@ export class AddRegisteredDoctorsComponent implements OnInit {
           this.site_value = site.name;
         }
       } else {
-        this.site_value = 'BP'
+        this.site_value = 'BP' + this.manager.site_id
       }
 
-      this.register_doctor.site_id = this.site_value + this.manager.site_id;
+      this.register_doctor.site_id = this.site_value;
       this.getDoctors();
     } else {
       this.router.navigate(['/']);
