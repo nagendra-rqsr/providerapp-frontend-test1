@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-registered-doctors',
@@ -12,6 +13,7 @@ export class AddRegisteredDoctorsComponent implements OnInit {
   doctors: any[] = [];
   manager: any = null;
   sites: any[] = [];
+  site_prefix = '';
 
   constructor(
     private appService: AppService,
@@ -19,11 +21,12 @@ export class AddRegisteredDoctorsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.site_prefix = environment.production ? '' : 'BP';
     let _mgr = sessionStorage.getItem('MGR_USR');
     if (_mgr) {
       this.manager = JSON.parse(_mgr);
       this.register_doctor.manager_id = this.manager.manager_id;
-      this.register_doctor.site_id = 'BP' + this.manager.site_id;
+      this.register_doctor.site_id = this.site_prefix + this.manager.site_id;
       this.getDoctors();
     } else {
       this.router.navigate(['/']);
