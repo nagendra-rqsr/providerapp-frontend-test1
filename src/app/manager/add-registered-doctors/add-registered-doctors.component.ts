@@ -21,19 +21,21 @@ export class AddRegisteredDoctorsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (environment.production) {
-      const site = this.appService.all_sites.find(x => x.id == this.manager.site_id);
-      if (site) {
-        this.site_value = site.name;
-      }
-    } else {
-      this.site_value = 'BP'
-    }
 
     let _mgr = sessionStorage.getItem('MGR_USR');
     if (_mgr) {
       this.manager = JSON.parse(_mgr);
       this.register_doctor.manager_id = this.manager.manager_id;
+
+      if (environment.production) {
+        const site = this.appService.all_sites.find(x => x.id == this.manager?.site_id);
+        if (site) {
+          this.site_value = site.name;
+        }
+      } else {
+        this.site_value = 'BP'
+      }
+
       this.register_doctor.site_id = this.site_value + this.manager.site_id;
       this.getDoctors();
     } else {
