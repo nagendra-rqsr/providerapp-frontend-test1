@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   getSites() {
     this.appService.getSites().subscribe(data => {
       this.sites = data;
+      this.appService.all_sites = this.sites;
     }, (err) => {
       // this.sites = [{ "id": "2", "name": "BP2" }, { "id": "1", "name": "BP1" }];
     });

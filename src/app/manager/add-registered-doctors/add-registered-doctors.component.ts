@@ -13,7 +13,7 @@ export class AddRegisteredDoctorsComponent implements OnInit {
   doctors: any[] = [];
   manager: any = null;
   sites: any[] = [];
-  site_prefix = '';
+  site_value = '';
 
   constructor(
     private appService: AppService,
@@ -21,17 +21,25 @@ export class AddRegisteredDoctorsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.site_prefix = environment.production ? '' : 'BP';
+    if (environment.production) {
+      const site = this.appService.all_sites.find(x => x.id == this.manager.site_id);
+      if (site) {
+        this.site_value = site.name;
+      }
+    } else {
+      this.site_value = 'BP'
+    }
+
     let _mgr = sessionStorage.getItem('MGR_USR');
     if (_mgr) {
       this.manager = JSON.parse(_mgr);
       this.register_doctor.manager_id = this.manager.manager_id;
-      this.register_doctor.site_id = this.site_prefix + this.manager.site_id;
+      this.register_doctor.site_id = this.site_value + this.manager.site_id;
       this.getDoctors();
     } else {
       this.router.navigate(['/']);
     }
-    
+
     // this.getSites();
   }
 

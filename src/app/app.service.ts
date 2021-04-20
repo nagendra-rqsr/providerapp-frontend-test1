@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AppService {
     baseUrl = environment.appUrl;
+    all_sites: any[] = [];
 
     constructor(private http: HttpClient) {
 
