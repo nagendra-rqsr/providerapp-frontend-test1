@@ -28,6 +28,7 @@ export class AddRegisteredDoctorsComponent implements OnInit {
     } else {
       this.router.navigate(['/']);
     }
+    //...
     // this.getSites();
   }
 
