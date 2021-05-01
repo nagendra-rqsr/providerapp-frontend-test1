@@ -45,8 +45,8 @@ export class AppService {
         return this.http.get<any>(url);
     }
 
-    getRegisteredDoctors(manager_id: any): Observable<any> {
-        const url = this.baseUrl + 'accounts/register-doctor/'
+    getRegisteredDoctors(siteId: any): Observable<any> {
+        const url = this.baseUrl + 'accounts/register-doctor/?site_id=' + siteId;
         return this.http.get<any>(url);
     }
 

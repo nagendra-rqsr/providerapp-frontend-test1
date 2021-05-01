@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registered-doctors',
@@ -10,6 +11,7 @@ import { AppService } from 'src/app/app.service';
 export class RegisteredDoctorsComponent implements OnInit {
   registered_doctors: any[] = [];
   isActiveDirty = false;
+  site_value = '';
 
   constructor(
     private appService: AppService,
@@ -17,15 +19,25 @@ export class RegisteredDoctorsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    let _mgr = sessionStorage.getItem('MGR_USR');
+    let _mgr: any = sessionStorage.getItem('MGR_USR');
     if(!_mgr) {
       this.router.navigate(['/']);
     }
+    let manager = JSON.parse(_mgr);
+    if (environment.production) {
+      const site = this.appService.all_sites.find(x => x.id == manager?.site_id);
+      if (site) {
+        this.site_value = site.name;
+      }
+    } else {
+      this.site_value = 'BP' + manager.site_id
+    }
+    
     this.getResiteredDoctors();
   }
 
   getResiteredDoctors() {
-    this.appService.getRegisteredDoctors(1).subscribe((data) => {
+    this.appService.getRegisteredDoctors(this.site_value).subscribe((data) => {
       this.registered_doctors = data;
     });
   }
