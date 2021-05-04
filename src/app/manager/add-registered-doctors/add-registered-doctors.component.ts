@@ -9,11 +9,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./add-registered-doctors.component.scss']
 })
 export class AddRegisteredDoctorsComponent implements OnInit {
+  EMAIL_REGEXP =
+    /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   register_doctor = { manager_id: '', doctor_id: '', doctor_name: '', site_id: '', email: '', password: '' };
   doctors: any[] = [];
   manager: any = null;
   sites: any[] = [];
   site_value = '';
+  ferror = { doctor: false, email: false, valid_email: false };
 
   constructor(
     private appService: AppService,
@@ -58,6 +61,19 @@ export class AddRegisteredDoctorsComponent implements OnInit {
   }
 
   onRegister() {
+    this.ferror = { doctor: false, email: false, valid_email: false };
+    if(!this.register_doctor.doctor_id) {
+      this.ferror.doctor = true;
+      return;
+    }
+    if(!this.register_doctor.email) {
+      this.ferror.email = true;
+      return;
+    } else if (!this.EMAIL_REGEXP.test(this.register_doctor.email)) {
+      this.ferror.valid_email = true;
+      return;
+    }
+    
     const doc = this.doctors.find(x => x.id == this.register_doctor.doctor_id);
     if (doc) {
       this.register_doctor.doctor_name = doc.doctor_name;
